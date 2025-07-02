@@ -1,0 +1,21 @@
+
+# 2. Define os serviços (contêineres) que compõem a aplicação.
+services:
+  # 3. Nome do nosso serviço. Pode ser qualquer nome, aqui usamos 'api'.
+  api:
+    # 4. Instrução para construir a imagem.
+    # 'build: .' diz ao Docker Compose para usar o Dockerfile no diretório atual.
+    build: .
+    # 5. Define um nome fixo e amigável para o contêiner, facilitando a sua identificação.
+    container_name: imersao_devops_api
+    # 6. Mapeia as portas.
+    # Mapeia a porta 8000 do seu computador (host) para a porta 8000 do contêiner.
+    ports:
+      - "8000:8000"
+    # 7. Monta os volumes. Essencial para o desenvolvimento.
+    # '.:/app' espelha o diretório atual do projeto para o diretório /app dentro do contêiner.
+    # Qualquer alteração no código local é refletida instantaneamente no contêiner,
+    # e o Uvicorn (com --reload no Dockerfile) reiniciará automaticamente.
+    # Isso também garante que o banco de dados SQLite (escola.db) seja salvo no seu computador.
+    volumes:
+      - .:/app
